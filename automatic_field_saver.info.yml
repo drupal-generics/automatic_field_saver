@@ -1,0 +1,5 @@
+name: Automatic Field Saver
+type: module
+description: Sets fields on entities based on certain rules.
+core: 8.x
+package: Custom

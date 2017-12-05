@@ -1,0 +1,4 @@
+services:
+  plugin.manager.automatic_field_saver.field_saver:
+    class: Drupal\automatic_field_saver\FieldSaver\PluginManager
+    parent: default_plugin_manager

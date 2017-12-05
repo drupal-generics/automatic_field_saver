@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Contains hook implementations.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+
+/**
+ * Implements hook_entity_presave().
+ */
+function automatic_field_saver_entity_presave(EntityInterface $entity) {
+  /** @var \Drupal\automatic_field_saver\FieldSaver\PluginManagerInterface $plugin_manager */
+  $plugin_manager = \Drupal::service('plugin.manager.automatic_field_saver.field_saver');
+  $entity_type = $entity->getEntityTypeId();
+  $bundle = $entity->bundle();
+  $definitions = $plugin_manager->getFieldSaverDefinitions($entity_type, $bundle);
+
+  foreach ($definitions as $definition) {
+    /** @var \Drupal\automatic_field_saver\FieldSaver\FieldSaverPluginBase $definition */
+    $definition->setFields($entity);
+  }
+}
